@@ -1,22 +1,20 @@
 package umb_user
 
 import (
+	"errors"
+	"fmt"
 	u "github.com/nikonor/umb_lib"
 	"golang.org/x/crypto/bcrypt"
 	"regexp"
 	"strconv"
 	"strings"
-    "errors"
-    "fmt"
 )
 
 const (
-    MinPasswordLength = 8
+	MinPasswordLength = 8
 )
 
-var (
-
-)
+var ()
 
 type User struct {
 	Id    int64
@@ -25,12 +23,12 @@ type User struct {
 
 func GenHash(email, password string) (string, error) {
 
-    if len(email) == 0 && !u.ValidateEmail(email) {
-        return "",errors.New("Email is not set or not valid")
-    }
-    if len(password) < MinPasswordLength {
-        return "",errors.New(fmt.Sprintf("Password is too short %d, %d",len(password),MinPasswordLength))
-    }
+	if len(email) == 0 && !u.ValidateEmail(email) {
+		return "", errors.New("Email is not set or not valid")
+	}
+	if len(password) < MinPasswordLength {
+		return "", errors.New(fmt.Sprintf("Password is too short %d, %d", len(password), MinPasswordLength))
+	}
 
 	conf := u.ReadConf("")
 
